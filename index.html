@@ -48,14 +48,16 @@
         img: './assets/img/selfie001.jpg',
         created_at: '2024-03-30T16:00:34.031Z',
         like: false,
-        heart: false
+        heart: false,
+        downloads: 0
       },
       {
         id: 2,
         img: './assets/img/selfie002.jpg',
         created_at: '2024-03-30T16:10:34.031Z',
         like: false,
-        heart: false
+        heart: false,
+        downloads: 0
       }
     ];
 
@@ -81,7 +83,11 @@
       });
     }
 
-    function download(source) {
+    function download(source, postId) {
+      const postIndex = posts.findIndex(p => p.id === Number(postId));
+
+      posts[postIndex].downloads += 1;
+
       const fileName = source.split('/').pop();
       const el = document.createElement("a");
 
@@ -92,6 +98,9 @@
 
       el.click();
       el.remove();
+
+      storePosts();
+      loadPosts();
     }
 
     function favorite(element, action) {
@@ -126,8 +135,8 @@
             <div class="background"></div>
 
             <div class="number-of-comments">
-              <i class="fa fa-comment" aria-hidden="true"></i>
-              <span>100</span>
+              <i class="fa fa-download"></i>
+              <span>${post.downloads}</span>
             </div>
 
             <img src="${post.img}">
@@ -136,7 +145,7 @@
           <div class="card-footer">
             <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')" style="color: ${post.like ? '#5564FF' : '#9E9E9E'};"></i>
             <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')" style="color: ${post.heart ? '#FC6565' : '#9E9E9E'};"></i>
-            <i class="fa fa-download" onclick="download('${post.img}')"></i>
+            <i class="fa fa-download" onclick="download('${post.img}', ${post.id})"></i>
           </div>
         </div>
         `;
@@ -162,7 +171,8 @@
           img: s,
           created_at: date.toISOString(),
           like: false,
-          heart: false
+          heart: false,
+          downloads: 0
         });
 
         storePosts();
