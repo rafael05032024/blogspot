@@ -27,7 +27,7 @@
         </div>
 
         <div class="new-post">
-          <input type="file" id="submit_inpt" style="display:none">
+          <input type="file" id="submit_inpt" style="display:none" onchange="loadFile(event)">
           <i class="fa fa-plus-square" id="submit_btn"></i>
         </div>
       </div>
@@ -56,7 +56,6 @@
       </div>
 
     </div>
-
   </main>
 
   <script>
@@ -94,42 +93,62 @@
 
     }
 
-    const mural = document.getElementById('posts');
+    function loadPosts() {
+      const mural = document.getElementById('posts');
 
-    posts.forEach((post) => {
-      const str = `
-      <div class="card" id="${post.id}">
-        <div class="card-header">
-        </div>
+      mural.innerHTML = '';
 
-        <div class="card-body">
-          <div class="background"></div>
-
-          <div class="number-of-comments">
-            <i class="fa fa-comment" aria-hidden="true"></i>
-            <span>100</span>
+      posts.forEach((post) => {
+        const str = `
+        <div class="card" id="${post.id}">
+          <div class="card-header">
           </div>
 
-          <img src="${post.img}">
+          <div class="card-body">
+            <div class="background"></div>
+
+            <div class="number-of-comments">
+              <i class="fa fa-comment" aria-hidden="true"></i>
+              <span>100</span>
+            </div>
+
+            <img src="${post.img}">
+          </div>
+
+          <div class="card-footer">
+            <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')"></i>
+            <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')"></i>
+          </div>
         </div>
+        `;
 
-        <div class="card-footer">
-          <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')"></i>
-          <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')"></i>
-        </div>
-      </div>
-      `;
+        const element = document.createElement('div');
 
-      const element = document.createElement('div');
+        element.className = 'card'
+        element.innerHTML = str;
 
-      element.className = 'card'
-      element.innerHTML = str;
+        element.style.color =
 
-      element.style.color =
+          mural.appendChild(element);
+      });
+    }
 
-        mural.appendChild(element);
-    });
+    function loadFile(event) {
+      const src = URL.createObjectURL(event.target.files[0]);
+      const date = new Date();
 
+      posts.push({
+        id: date.getTime(),
+        img: src,
+        created_at: date.toISOString(),
+        like: false,
+        heart: false
+      });
+
+      loadPosts();
+    };
+
+    loadPosts();
   </script>
 </body>
 
