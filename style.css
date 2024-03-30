@@ -42,6 +42,8 @@ header {
 .new-post i {
   font-size: 32px;
   cursor: pointer;
+
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .posts {
@@ -134,10 +136,10 @@ header {
 }
 
 .card-footer {
-  background-color: blue;
   height: 40px;
 
   border-radius: 0 0 10px 10px;
+  border-bottom: 5px solid rgb(136, 136, 175);
 
   background-color: white;
   color: #9E9E9E;
@@ -156,18 +158,4 @@ header {
 
 .card-footer i:hover {
   transform: scale(1.1, 1.1);
-}
-
-.modal-container {
-  background-color: black;
-
-  position: absolute;
-  top: 0;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 999;
-
-  display: none;
 }
