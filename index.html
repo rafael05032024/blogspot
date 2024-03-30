@@ -39,9 +39,10 @@
   <script>
     document.getElementById('submit_btn').addEventListener('click', () => {
       document.getElementById('submit_inpt').click();
-    })
+    });
 
-    const posts = [
+    const loadedPosts = localStorage.getItem('storage_posts');
+    const posts = loadedPosts ? JSON.parse(loadedPosts) : [
       {
         id: 1,
         img: './assets/img/selfie001.jpg',
@@ -57,6 +58,21 @@
         heart: false
       }
     ];
+
+    const getBase64FromUrl = async (url) => {
+      const data = await fetch(url);
+      const blob = await data.blob();
+
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const base64data = reader.result;
+          resolve(base64data);
+        }
+      });
+    }
 
     function download(source) {
       const fileName = source.split('/').pop();
@@ -131,15 +147,19 @@
       const src = URL.createObjectURL(event.target.files[0]);
       const date = new Date();
 
-      posts.push({
-        id: date.getTime(),
-        img: src,
-        created_at: date.toISOString(),
-        like: false,
-        heart: false
-      });
+      getBase64FromUrl(src).then((s) => {
+        posts.push({
+          id: date.getTime(),
+          img: s,
+          created_at: date.toISOString(),
+          like: false,
+          heart: false
+        });
 
-      loadPosts();
+        localStorage.setItem('storage_posts', JSON.stringify(posts));
+
+        loadPosts();
+      })
     };
 
     loadPosts();
