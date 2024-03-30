@@ -26,7 +26,7 @@
           <span>56</span>
         </div>
 
-        <div class="new-post">
+        <div class="new-post" style="color: #fff;">
           <input type="file" id="submit_inpt" style="display:none" onchange="loadFile(event)">
           <i class="fa fa-plus-square" id="submit_btn"></i>
         </div>
@@ -58,6 +58,13 @@
         heart: false
       }
     ];
+
+    function storePosts() {
+      localStorage.setItem(
+        'storage_posts',
+        JSON.stringify(posts)
+      );
+    }
 
     const getBase64FromUrl = async (url) => {
       const data = await fetch(url);
@@ -94,6 +101,8 @@
 
       posts[postIndex][action] = favorited;
 
+      storePosts();
+
       element.style.color = favorited
         ? (action === 'like' ? '#5564FF' : '#FC6565')
         : '#9E9E9E'
@@ -125,8 +134,8 @@
           </div>
 
           <div class="card-footer">
-            <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')"></i>
-            <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')"></i>
+            <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')" style="color: ${post.like ? '#5564FF' : '#9E9E9E'};"></i>
+            <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')" style="color: ${post.heart ? '#FC6565' : '#9E9E9E'};"></i>
             <i class="fa fa-download" onclick="download('${post.img}')"></i>
           </div>
         </div>
@@ -156,8 +165,7 @@
           heart: false
         });
 
-        localStorage.setItem('storage_posts', JSON.stringify(posts));
-
+        storePosts();
         loadPosts();
       })
     };
