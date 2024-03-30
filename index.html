@@ -80,6 +80,19 @@
       }
     ];
 
+    function download(source) {
+      const fileName = source.split('/').pop();
+      const el = document.createElement("a");
+
+      el.setAttribute("href", source);
+      el.setAttribute("download", fileName);
+
+      document.body.appendChild(el);
+
+      el.click();
+      el.remove();
+    }
+
     function favorite(element, action) {
       const [, id] = element.id.split(`${action}-btn-`)
       const postIndex = posts.findIndex(p => p.id === Number(id));
@@ -118,6 +131,7 @@
           <div class="card-footer">
             <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')"></i>
             <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')"></i>
+            <i class="fa fa-download" onclick="download('${post.img}')"></i>
           </div>
         </div>
         `;
