@@ -47,7 +47,6 @@ header {
 .posts {
   width: 100%;
   max-width: 1000px;
-  height: 100%;
 
   margin: auto;
 
@@ -157,4 +156,18 @@ header {
 
 .card-footer i:hover {
   transform: scale(1.1, 1.1);
+}
+
+.modal-container {
+  background-color: black;
+
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 999;
+
+  display: none;
 }
