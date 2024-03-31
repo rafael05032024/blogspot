@@ -88,6 +88,7 @@ function favorite(element, action) {
   posts[postIndex][action] = favorited;
 
   storePosts();
+  loadPosts();
 
   element.style.color = favorited
     ? (action === 'like' ? '#5564FF' : '#FC6565')
