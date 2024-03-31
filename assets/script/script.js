@@ -9,24 +9,7 @@ const filterKeyMapper = {
 };
 const loadedPosts = localStorage.getItem('storage_posts');
 let filterBy = 'filter-all';
-let posts = loadedPosts ? JSON.parse(loadedPosts) : [
-  {
-    id: 1,
-    img: './assets/img/selfie001.jpg',
-    created_at: '2024-03-30T16:00:34.031Z',
-    like: false,
-    heart: false,
-    downloads: 0
-  },
-  {
-    id: 2,
-    img: './assets/img/selfie002.jpg',
-    created_at: '2024-03-30T16:10:34.031Z',
-    like: false,
-    heart: false,
-    downloads: 0
-  }
-];
+let posts = loadedPosts ? JSON.parse(loadedPosts) : [];
 
 function storePosts() {
   localStorage.setItem(
