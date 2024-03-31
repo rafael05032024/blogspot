@@ -85,8 +85,6 @@ header {
   position: absolute;
 
   z-index: 1;
-
-  transition: all 0.5s ease-in-out;
 }
 
 .card-body .background {
@@ -134,10 +132,6 @@ header {
 
 .card-body:hover .number-of-comments {
   opacity: 1;
-}
-
-.card-body:hover img {
-  transform: scale(1.01, 1.01);
 }
 
 .card-footer {
