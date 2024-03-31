@@ -9,6 +9,8 @@
     integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <title>Blogspot</title>
 </head>
 
@@ -36,7 +38,7 @@
     });
 
     const loadedPosts = localStorage.getItem('storage_posts');
-    const posts = loadedPosts ? JSON.parse(loadedPosts) : [
+    let posts = loadedPosts ? JSON.parse(loadedPosts) : [
       {
         id: 1,
         img: './assets/img/selfie001.jpg',
@@ -113,6 +115,33 @@
 
     }
 
+    function handleDelete(id) {
+      Swal.fire({
+        title: "Tem certeza?",
+        text: "A imagem será deletada da sua galeria!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, deletar!",
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          posts = posts.filter(post => post.id !== Number(id));
+
+          Swal.fire({
+            title: "Deleteda!",
+            text: "Sua imagem foi deleta.",
+            icon: "success"
+          });
+
+          storePosts();
+          loadPosts();
+        }
+      });
+
+    }
+
     function loadPosts() {
       const mural = document.getElementById('posts');
 
@@ -141,6 +170,7 @@
             <i class="fa fa-thumbs-up" id="like-btn-${post.id}" onclick="favorite(this, 'like')" style="color: ${post.like ? '#5564FF' : '#9E9E9E'};"></i>
             <i class="fa fa-heart" id="heart-btn-${post.id}" onclick="favorite(this, 'heart')" style="color: ${post.heart ? '#FC6565' : '#9E9E9E'};"></i>
             <i class="fa fa-download" onclick="download('${post.img}', ${post.id})"></i>
+            <i class="fa fa-trash" onclick="handleDelete('${post.id}')"></i>
           </div>
         </div>
         `;
