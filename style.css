@@ -91,10 +91,24 @@ header {
   cursor: pointer;
 
   display: flex;
+
+  transition: color 0.3s ease-in-out;
 }
 
 .filter span i {
   margin-left: 4px;
+}
+
+.filter #filter-all {
+  border-bottom: 2px solid #8888AF;
+}
+
+.filter #filter-liked {
+  border-bottom: 2px solid #5564FF;
+}
+
+.filter #filter-hearted {
+  border-bottom: 4px solid #FC6565;
 }
 
 .posts {

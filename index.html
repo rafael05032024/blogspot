@@ -107,6 +107,7 @@
       const element = document.getElementById(id);
 
       element.style.color = collorMapper[id];
+      element.style.borderBottom = `2px solid ${collorMapper[id]}`
 
       for (const spanId of Object.keys(collorMapper)) {
         if (id === spanId) continue;
@@ -114,6 +115,7 @@
         const span = document.getElementById(spanId);
 
         span.style.color = '#9E9E9E';
+        span.style.borderBottom = 'none';
       }
 
       filterBy = id;
