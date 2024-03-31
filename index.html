@@ -41,16 +41,16 @@
     </header>
 
     <div class="filter">
-      <span id="filter-all" onclick="loadByFilter(this)">
+      <span id="filter-all" onclick="loadByFilter(this.id)">
         TODOS
       </span>
 
-      <span id="filter-liked" onclick="loadByFilter(this)">
+      <span id="filter-liked" onclick="loadByFilter(this.id)">
         GOSTEI
         <i class="fa fa-thumbs-up"></i>
       </span>
 
-      <span id="filter-hearted" onclick="loadByFilter(this)">
+      <span id="filter-hearted" onclick="loadByFilter(this.id)">
         AMEI
         <i class="fa fa-heart"></i>
       </span>
@@ -97,13 +97,14 @@
       );
     }
 
-    function loadByFilter(element) {
-      const id = element.id;
+    function loadByFilter(id) {
       const collorMapper = {
         [filterKeyMapper.ALL]: '#8888AF',
         [filterKeyMapper.LIKED]: '#5564FF',
         [filterKeyMapper.HEARTED]: '#FC6565'
       };
+
+      const element = document.getElementById(id);
 
       element.style.color = collorMapper[id];
 
@@ -308,7 +309,7 @@
       })
     };
 
-    loadPosts();
+    loadByFilter(filterKeyMapper.ALL);
   </script>
 </body>
 
