@@ -30,7 +30,7 @@ header {
 
   background-color: rgb(136, 136, 175);
 
-  border-bottom: 8px solid rgb(116, 116, 149);
+  border-bottom: 5px solid rgb(116, 116, 149);
 }
 
 .logo {
@@ -71,6 +71,30 @@ header {
   cursor: pointer;
 
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 10px;
+
+  font-weight: bold;
+  font-size: 18px;
+
+  color: #9E9E9E;
+}
+
+.filter span {
+  cursor: pointer;
+
+  display: flex;
+}
+
+.filter span i {
+  margin-left: 4px;
 }
 
 .posts {

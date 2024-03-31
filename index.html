@@ -40,6 +40,22 @@
       </div>
     </header>
 
+    <div class="filter">
+      <span id="filter-all" onclick="loadByFilter(this)">
+        TODOS
+      </span>
+
+      <span id="filter-liked" onclick="loadByFilter(this)">
+        GOSTEI
+        <i class="fa fa-thumbs-up"></i>
+      </span>
+
+      <span id="filter-hearted" onclick="loadByFilter(this)">
+        AMEI
+        <i class="fa fa-heart"></i>
+      </span>
+    </div>
+
     <div class="posts" id="posts"></div>
   </main>
 
@@ -48,7 +64,13 @@
       document.getElementById('submit_inpt').click();
     });
 
+    const filterKeyMapper = {
+      ALL: 'filter-all',
+      LIKED: 'filter-liked',
+      HEARTED: 'filter-hearted'
+    };
     const loadedPosts = localStorage.getItem('storage_posts');
+    let filterBy = 'filter-all';
     let posts = loadedPosts ? JSON.parse(loadedPosts) : [
       {
         id: 1,
@@ -73,6 +95,29 @@
         'storage_posts',
         JSON.stringify(posts)
       );
+    }
+
+    function loadByFilter(element) {
+      const id = element.id;
+      const collorMapper = {
+        [filterKeyMapper.ALL]: '#8888AF',
+        [filterKeyMapper.LIKED]: '#5564FF',
+        [filterKeyMapper.HEARTED]: '#FC6565'
+      };
+
+      element.style.color = collorMapper[id];
+
+      for (const spanId of Object.keys(collorMapper)) {
+        if (id === spanId) continue;
+
+        const span = document.getElementById(spanId);
+
+        span.style.color = '#9E9E9E';
+      }
+
+      filterBy = id;
+
+      loadPosts();
     }
 
     const getBase64FromUrl = async (url) => {
@@ -181,21 +226,33 @@
 
     function loadPosts() {
       const mural = document.getElementById('posts');
+      let display = [];
 
       mural.innerHTML = '';
 
-      if (!posts.length) {
+      switch (filterBy) {
+        case filterKeyMapper.HEARTED:
+          display = posts.filter(post => post.heart);
+          break;
+        case filterKeyMapper.LIKED:
+          display = posts.filter(post => post.like);
+          break;
+        default:
+          display = posts;
+      }
+
+      if (!display.length) {
         const div = document.createElement('h4');
 
         div.className = 'no-images-warning'
-        div.innerHTML = 'Nenhuma imagem adicionada';
+        div.innerHTML = 'Nenhuma imagem encontrada!';
 
         mural.appendChild(div);
 
         return;
       }
 
-      posts
+      display
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .forEach((post) => {
           const html = `
