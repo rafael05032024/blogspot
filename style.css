@@ -49,13 +49,24 @@ header {
   height: 40px;
 }
 
-.new-post {
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.actions svg {
+  color: white;
+  cursor: pointer;
+}
+
+.add-new-post-action {
   display: flex;
   align-items: center;
   margin-right: 5px;
 }
 
-.new-post i {
+.add-new-post-action i {
   font-size: 32px;
   cursor: pointer;
 
