@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -15,12 +15,16 @@
 <body>
   <main>
     <header>
-      <div class="counters">
-        <div class="new-post" style="color: #fff;">
-          <input type="file" id="submit_inpt" style="display:none" onchange="loadFile(event)">
-          <i class="fa fa-plus-square" id="submit_btn"></i>
-        </div>
+      <div class="logo">
+        <img src="./assets/img/thames.png">
+        <span>Blogspaper</span>
       </div>
+
+      <div class="new-post" style="color: #fff;">
+        <input type="file" id="submit_inpt" style="display:none" onchange="loadFile(event)">
+        <i class="fa fa-plus-square" id="submit_btn"></i>
+      </div>
+
     </header>
 
     <div class="posts" id="posts"></div>
