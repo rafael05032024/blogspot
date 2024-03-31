@@ -231,6 +231,10 @@ header {
 }
 
 .no-images-warning {
+  margin-top: 20px;
+
+  width: 100%;
+
   color: #9E9E9E;
 
   display: flex;
