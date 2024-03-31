@@ -167,10 +167,10 @@ function loadPosts() {
   }
 
   if (!display.length) {
-    const div = document.createElement('h4');
+    const div = document.createElement('div');
 
     div.className = 'no-images-warning'
-    div.innerHTML = 'Nenhuma imagem encontrada!';
+    div.innerHTML = '<h4>Nenhuma imagem encontrada!</h4> <img src="./assets/img/not-found.png"/>';
 
     mural.appendChild(div);
 

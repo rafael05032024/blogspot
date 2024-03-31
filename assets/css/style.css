@@ -229,3 +229,16 @@ header {
 .card-footer i:hover {
   transform: scale(1.1, 1.1);
 }
+
+.no-images-warning {
+  color: #9E9E9E;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.no-images-warning img {
+  width: 30px;
+}
