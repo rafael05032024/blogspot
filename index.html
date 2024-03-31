@@ -72,6 +72,7 @@
         reader.readAsDataURL(blob);
         reader.onloadend = () => {
           const base64data = reader.result;
+
           resolve(base64data);
         }
       });
@@ -83,15 +84,15 @@
       posts[postIndex].downloads += 1;
 
       const fileName = source.split('/').pop();
-      const el = document.createElement("a");
+      const anchor = document.createElement("a");
 
-      el.setAttribute("href", source);
-      el.setAttribute("download", fileName);
+      anchor.setAttribute("href", source);
+      anchor.setAttribute("download", fileName);
 
-      document.body.appendChild(el);
+      document.body.appendChild(anchor);
 
-      el.click();
-      el.remove();
+      anchor.click();
+      anchor.remove();
 
       storePosts();
       loadPosts();
@@ -120,7 +121,7 @@
       posts
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .forEach((post) => {
-          const str = `
+          const html = `
         <div class="card" id="${post.id}">
           <div class="card-header">
           </div>
@@ -144,14 +145,12 @@
         </div>
         `;
 
-          const element = document.createElement('div');
+          const div = document.createElement('div');
 
-          element.className = 'card'
-          element.innerHTML = str;
+          div.className = 'card'
+          div.innerHTML = html;
 
-          element.style.color =
-
-            mural.appendChild(element);
+          mural.appendChild(div);
         });
     }
 
