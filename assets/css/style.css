@@ -34,9 +34,9 @@ header {
 }
 
 .logo {
-  font-family: "Dancing Script", cursive;
-  font-weight: bold;
-  font-size: 24px;
+  /*font-family: "Dancing Script", cursive;*/
+  font-weight: thin;
+  font-size: 20px;
   color: white;
 
   display: flex;
@@ -45,8 +45,8 @@ header {
 }
 
 .logo img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .actions {
